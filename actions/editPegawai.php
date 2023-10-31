@@ -1,28 +1,27 @@
-<?php 
+<?php
 ob_start();
 session_start();
 include "../config/connection.php";
 include "../helper/validasi.php";
-if(empty($_SESSION['username'])){
+if (empty($_SESSION['username'])) {
   header("location: ../index.php");
 }
 
-  $nobp =  $_POST['nobp'];
-  $nama =  $_POST['namaMhs'];
-  $jurusan =  $_POST['jurusan'];
-  $kelas =  $_POST['kelas'];
-  
-  checked($nama, "pages/mahasiswa.php");
-  checked($nobp, "pages/mahasiswa.php");
-  checked($jurusan, "pages/mahasiswa.php");
-  checked($kelas, "pages/mahasiswa.php");
-  
-  $query = "UPDATE tb_mhs SET nama_mhs='$nama', jurusan='$jurusan', kelas='$kelas' WHERE nobp='$nobp'";
-  $result = mysqli_query($db, $query);
+$nip =  $_POST['nip'];
+$nama_pegawai =  $_POST['nama_pegawai'];
+$jabatan =  $_POST['jabatan'];
+$golongan =  $_POST['golongan'];
 
-  if($result){
-    header('Location: ../pages/mahasiswa.php?message=data berhasil di Edit!&code=200');
-  } else {
-    header('location : ../pages/mahasiswa.php?message=Edit data gagal!&code=400');
-  }
-?>
+checked($nama_pegawai, "pages/pegawai.php");
+checked($nip, "pages/pegawai.php");
+checked($jabatan, "pages/pegawai.php");
+checked($golongan, "pages/pegawai.php");
+
+$query = "UPDATE tb_pegawai SET nama_pegawai='$nama_pegawai', jabatan='$jabatan', golongan='$golongan' WHERE nip='$nip'";
+$result = mysqli_query($db, $query);
+
+if ($result) {
+  header('Location: ../pages/pegawai.php?message=data berhasil di Edit!&code=200');
+} else {
+  header('location : ../pages/pegawai.php?message=Edit data gagal!&code=400');
+}

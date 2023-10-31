@@ -4,8 +4,8 @@ include "../components/kepala_menu.php";
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-  <a class="btn btn-primary pt-1 pb-1 pl-2 pr-2 mt-1 mb-1" href="../pages/addKrs.php">Tambah data</a>
-  <h2>Report</h2>
+
+  <h2>Laporan Absensi Pegawai</h2>
   <div class="table-responsive">
     <?php
     if (isset($_GET['message']) && isset($_GET['code'])) {
@@ -40,7 +40,7 @@ include "../components/kepala_menu.php";
             <td><?php echo $result['nip'] ?> </td>
             <td><?php echo $result['nama_pegawai'] ?> </td>
             <td>
-              <a class="btn btn-warning pt-1 pt-1 pb-1 pl-4 pr-4" href="./tampilanReport.php?nip=<?php echo $result['nip'] ?>" target="_blank">Cetak Report</a>
+              <a class="btn btn-warning pt-1 pt-1 pb-1 pl-4 pr-4" href="./tampilanReport.php?nip=<?php echo $result['nip'] ?>" target="_blank">Laporan</a>
             </td>
           </tr>
           <?php $i++ ?>

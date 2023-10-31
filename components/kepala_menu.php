@@ -83,12 +83,9 @@ if (empty($_SESSION['username'])) {
 <body>
 
   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Lurah Kubu Dalam Parak Karakah</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Selamat Datang, <?php echo $_SESSION['username'] ?></a>
+    <h1 style="color: white;" class="h5"> Sistem Informasi Absensi Pegawai Kantor Lurah Kubu Dalam Parak Karakah</h1>
     <div class="navbar-nav">
-
     </div>
   </header>
 
@@ -107,14 +104,14 @@ if (empty($_SESSION['username'])) {
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="../pages/pegawai.php">
                 <span data-feather="home" class="align-text-bottom"></span>
-                Pegawai
+                Daftar Pegawai
               </a>
             </li>
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="../pages/report.php">
                 <span data-feather="home" class="align-text-bottom"></span>
-                Report
+                Laporan Absen
               </a>
             </li>
 
