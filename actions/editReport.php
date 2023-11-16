@@ -1,25 +1,26 @@
-<?php 
-ob_start();
+<?php
 session_start();
 include "../config/connection.php";
 include "../helper/validasi.php";
-if(empty($_SESSION['username'])){
-  header("location: ../index.php?message=anda belum login");
+
+if (empty($_SESSION['username'])) {
+  header("location: ../index.php");
 }
 
-$id = $_POST['id'];
-$nobp = $_POST['nobp'];
-$idJadwal = $_POST['idJadwal'];
+$nip = mysqli_real_escape_string($db, $_POST['nip']);
+$tanggal = mysqli_real_escape_string($db, $_POST['tanggal']);
+$hari = mysqli_real_escape_string($db, $_POST['hari']);
+$jam_masuk = mysqli_real_escape_string($db, $_POST['jam_masuk']);
+$jam_pulang = mysqli_real_escape_string($db, $_POST['jam_pulang']);
+$keterangan = mysqli_real_escape_string($db, $_POST['keterangan']);
 
-checked($id, "pages/krs.php");
-checked($nobp, "pages/krs.php");
-checked($idJadwal, "pages/krs.php");
-
-$query = "UPDATE tb_krs_mhs SET nobp='$nobp', id_jadwal='$idJadwal' WHERE id='$id'";
-$result = mysqli_query($db, $query);
-
-if ($result) {
-  header("location: ../pages/krs.php?message=data berhasil di Edit!&code=200");
+if (empty($nip) || empty($tanggal) || empty($hari) || empty($jam_masuk) || empty($jam_pulang) || empty($keterangan)) {
+  $_SESSION['message'] = "Semua input harus diisi";
+  $_SESSION['code'] = "danger";
 } else {
-  header('location : ../pages/krs.php?message=Edit data gagal!&code=400');
+  $query = "INSERT INTO absen_pegawai (nip, tanggal, hari, jam_masuk, jam_pulang, keterangan) VALUES ('$nip', '$tanggal', '$hari', '$jam_masuk', '$jam_pulang', '$keterangan')";
+  $result = mysqli_query($db, $query);
 }
+
+header("location: ../pages/editReport.php");
+exit();

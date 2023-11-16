@@ -5,7 +5,8 @@ if (empty($_SESSION['username'])) {
   header("location: ../index.php");
 }
 ?>
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -18,7 +19,6 @@ if (empty($_SESSION['username'])) {
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
   <link rel="stylesheet" href="../assets/dropdowns.css">
-
 
   <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -73,57 +73,110 @@ if (empty($_SESSION['username'])) {
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
     }
+
+    /* Gaya untuk kepala menu */
+    header.sticky-top {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #3498db;
+      padding: 10px;
+      text-align: center;
+    }
+
+    header.sticky-top h1 {
+      color: white;
+    }
+
+    /* Gaya tambahan untuk sidebar menu */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 220px;
+      /* Sesuaikan lebar sidebar sesuai kebutuhan */
+      background-color: #fff;
+      /* Warna latar belakang sidebar (putih) */
+      padding-top: 56px;
+      /* Sesuaikan dengan tinggi kepala menu */
+      overflow-y: auto;
+    }
+
+    .sidebar a {
+      padding: 15px;
+      text-decoration: none;
+      color: #3498db;
+      /* Warna teks sidebar (biru) */
+      display: block;
+      transition: color 0.3s;
+      /* Efek transisi warna */
+    }
+
+    .sidebar a:hover {
+      background-color: #ecf0f1;
+      /* Warna latar belakang saat di-hover (biru muda) */
+      color: #000;
+      /* Warna teks saat di-hover (hitam) */
+    }
+
+    .content {
+      margin-left: 220px;
+      /* Sesuaikan dengan lebar sidebar */
+      padding: 16px;
+    }
   </style>
 
-
-  <!-- Custom styles for this template -->
+  <!-- Gaya khusus untuk template ini -->
   <link href="../dashboard/dashboard.css" rel="stylesheet">
 </head>
 
 <body>
 
-  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Selamat Datang, <?php echo $_SESSION['username'] ?></a>
-    <h1 style="color: white;" class="h5"> Sistem Informasi Absensi Pegawai Kantor Lurah Kubu Dalam Parak Karakah</h1>
+  <header class="navbar navbar-dark sticky-top">
+    <a href="#" style="color: white; text-decoration: none; text-align: center; letter-spacing: 1px">Selamat Datang, <?php echo $_SESSION['username'] ?></a>
+    <h1 class="h5 m-0">Sistem Absensi Pegawai - Kantor Lurah Parak Karakah</h1>
     <div class="navbar-nav">
     </div>
   </header>
 
-  <div class="container-fluid">
-    <div class="row">
-      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-        <div class="position-sticky pt-3 sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="../pages/menu_utama.php">
-                <span data-feather="home" class="align-text-bottom"></span>
-                Dashboard
-              </a>
-            </li>
+  <!-- Sidebar menu -->
+  <nav class="sidebar">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="../pages/menu_utama.php">
+          <span data-feather="home" class="align-text-bottom"></span>
+          Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="../pages/pegawai.php">
+          <span data-feather="home" class="align-text-bottom"></span>
+          Daftar Pegawai
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="../pages/report.php">
+          <span data-feather="home" class="align-text-bottom"></span>
+          Laporan Absen
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="../actions/logout.php">
+          <span data-feather="lock" class="align-text-bottom"></span>
+          Log Out
+        </a>
+      </li>
+    </ul>
+  </nav>
 
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="../pages/pegawai.php">
-                <span data-feather="home" class="align-text-bottom"></span>
-                Daftar Pegawai
-              </a>
-            </li>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="../pages/report.php">
-                <span data-feather="home" class="align-text-bottom"></span>
-                Laporan Absen
-              </a>
-            </li>
+  <!-- Content area -->
+  <div class="content">
+    <!-- Isi konten Anda di sini -->
+  </div>
 
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="../actions/logout.php">
-                <span data-feather="lock" class="align-text-bottom"></span>
-                Log Out
-              </a>
-            </li>
-          </ul>
+  <!-- Gaya khusus untuk template ini -->
+  <script src="../dashboard/dashboard.js"></script>
+</body>
 
-
-
-        </div>
-      </nav>
+</html>

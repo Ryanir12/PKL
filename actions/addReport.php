@@ -1,30 +1,34 @@
-<?php 
+<?php
 session_start();
 include "../config/connection.php";
 include "../helper/validasi.php";
-if(empty($_SESSION['username'])){
+
+if (empty($_SESSION['username'])) {
   header("location: ../index.php");
 }
-$nobp = $_POST['nobp'];
-$idJadwal = $_POST['idJadwal'];
-$program = $_POST['program'];
-checked($nobp, "pages/krs.php");
-checked($idJadwal, "pages/krs.php");
-checked($program, "pages/krs.php");
 
-$query = "SELECT * FROM tb_krs_mhs WHERE nobp='$nobp' AND id_jadwal='$idJadwal'" ;
-$result = mysqli_query($db, $query);
+$nip = mysqli_real_escape_string($db, $_POST['nip']);
+$tanggal = mysqli_real_escape_string($db, $_POST['tanggal']);
+$hari = mysqli_real_escape_string($db, $_POST['hari']);
+$jam_masuk = mysqli_real_escape_string($db, $_POST['jam_masuk']);
+$jam_pulang = mysqli_real_escape_string($db, $_POST['jam_pulang']);
+$keterangan = mysqli_real_escape_string($db, $_POST['keterangan']);
 
-$cek = mysqli_num_rows($result);
-if($cek) {
-  header("location: ../pages/krs.php?message=data gagal di tambahkan!&code=400");
+if (empty($nip) || empty($tanggal) || empty($hari) || empty($jam_masuk) || empty($jam_pulang) || empty($keterangan)) {
+  $_SESSION['message'] = "Semua input harus diisi";
+  $_SESSION['code'] = 400;
 } else {
-  $query1 = "INSERT INTO tb_krs_mhs (nobp, id_jadwal, program) VALUES ('$nobp', '$idJadwal', '$program')";
-  $result1 = mysqli_query($db, $query1);
+  $query = "INSERT INTO absen_pegawai (nip, tanggal, hari, jam_masuk, jam_pulang, keterangan) VALUES ('$nip', '$tanggal', '$hari', '$jam_masuk', '$jam_pulang', '$keterangan')";
 
-  if ($result1) {
-    header("location: ../pages/krs.php?message=data berhasil di tambahkan!&code=201");
+  $result = mysqli_query($db, $query);
+
+  if ($result) {
+    $_SESSION['message'] = "Data berhasil ditambahkan";
+    $_SESSION['code'] = 200;
   } else {
-    header('location : ../pages/matakuliah.php?message=tambah data gagal!&code=400');
+    $_SESSION['message'] = "Terjadi kesalahan. Data gagal ditambahkan";
+    $_SESSION['code'] = 500;
   }
 }
+
+header("location: ../pages/report.php");
